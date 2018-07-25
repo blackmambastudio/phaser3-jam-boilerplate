@@ -1,7 +1,12 @@
 import 'phaser'
 
 import BootScene from './scenes/boot'
-import MenuScene from './scenes/menu'
+
+import MenuAScene from './scenes/menuA'
+import MenuBScene from './scenes/menuB'
+import MenuCScene from './scenes/menuC'
+
+import getSceneManager from './managers/sceneManager'
 
 window.game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -12,9 +17,15 @@ window.game = new Phaser.Game({
   backgroundColor: 0x000,
   scene: [
     BootScene,
-    MenuScene
+    MenuAScene,
+    MenuBScene,
+    MenuCScene
   ]
 })
 
+// init manager
+getSceneManager(window.game.scene)
+
 document.getElementById('game').focus()
+
 window.focus()
