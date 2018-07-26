@@ -28,6 +28,22 @@ export default class HUDGameScene extends Scene {
 
     this.titleText.y += 20
     this.titleText.x += 20
+
+    // display and get notified when a value changes in the game
+    this.angleText = this.add.bitmapText(450, 550, 'keneyPixel', `Angle: ${this.registry.get('angle')}`)
+    this.angleText.setTint(0xffffff)
+    this.lapsText = this.add.bitmapText(450, 570, 'keneyPixel', `Laps: ${this.registry.get('laps') || 0}`)
+    this.lapsText.setTint(0xffffff)
+
+    this.registry.events.on('changedata', this.updateData, this)
+  }
+
+  updateData (parent, key, data) {
+    if (key === 'angle') {
+      this.angleText.setText(`Angle: ${data}`)
+    } else if(key === 'laps'){
+      this.lapsText.setText(`Laps: ${data}`)
+    }
   }
 
 }

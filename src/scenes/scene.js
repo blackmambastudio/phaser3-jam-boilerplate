@@ -54,16 +54,16 @@ export default class Scene extends Phaser.Scene {
     })
   }
 
-  open (sceneKey) {
-    this.sceneManager.openMenu(sceneKey)
+  open (sceneKey, data) {
+    this.sceneManager.openMenu(sceneKey, data)
   }
 
   close () {
-    this.sceneManager.closeMenu(this.sceneKey)
+    this.sceneManager.closeMenu(this.scene.key)
   }
 
-  changeToScene (sceneKey) {
-    this.sceneManager.changeToScene(sceneKey)
+  changeToScene (sceneKey, data) {
+    this.sceneManager.changeToScene(sceneKey, data)
   }
 
   createButton (props) {

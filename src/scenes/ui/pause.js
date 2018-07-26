@@ -7,7 +7,12 @@ export default class PauseScene extends Scene {
 
   create (params) {
     super.create(params)
-
+    // objects
+    let graphics = this.add.graphics()
+    graphics.fillStyle(0x331122, 0.8)
+    graphics.fillRect(0, 0, 800, 600)
+    // graphics
+    // buttons
     this.back = this.createButton({
       x: 100,
       y: 200,
@@ -45,6 +50,8 @@ export default class PauseScene extends Scene {
     this.titleText.y += 40
     this.titleText.x += 40
 
+    //events
+
     this.events.on('shutdown', ()=>{
       this.shutdown()
     }, this)
@@ -54,5 +61,6 @@ export default class PauseScene extends Scene {
 
   shutdown() {
     this.sceneManager.resumeGame()
+    this.events.off('shutdown')
   }
 }

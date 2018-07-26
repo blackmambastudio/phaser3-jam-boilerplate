@@ -6,26 +6,27 @@ class SceneManager {
     this.gameKeys = []
   }
 
-  changeToScene (key) {
+  changeToScene (key, data) {
     this.stack.forEach(sceneKey => {
       this.scene.queueOp('stop', sceneKey)
       this.removeGameScene(sceneKey)
     })
 
-    this.scene.queueOp('start', key)
+    this.scene.queueOp('start', key, data || {})
     this.stack = [key]
     this.gameKeys = []
   }
 
-  openMenu (key) {
+  openMenu (key, data) {
     let lastKey = this.getLastSceneKey()
 
     this.scene.queueOp('pause', lastKey)
     this.scene.getScene(lastKey).sys.setVisible(false)
 
-    this.scene.queueOp('start', key)
+    this.scene.queueOp('start', key, data || {})
     this.scene.bringToTop(key)
     this.stack.push(key)
+    console.log(this.stack)
   }
 
   closeMenu (key) {
