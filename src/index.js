@@ -1,10 +1,18 @@
 import 'phaser'
 
-import BootScene from './scenes/boot'
+import BootScene from './scenes/ui/boot'
 
-import MenuAScene from './scenes/menuA'
-import MenuBScene from './scenes/menuB'
-import MenuCScene from './scenes/menuC'
+import SplashScene from './scenes/ui/splash'
+import MadeWithScene from './scenes/ui/madeWith'
+
+import MainMenuScene from './scenes/ui/mainMenu'
+import OptionsScene from './scenes/ui/options'
+import CreditsScene from './scenes/ui/credits'
+
+import HUDGameScene from './scenes/game/HUDGame'
+import BaseGameScene from './scenes/game/baseGame'
+
+import PauseScene from './scenes/ui/pause'
 
 import getSceneManager from './managers/sceneManager'
 
@@ -17,9 +25,14 @@ window.game = new Phaser.Game({
   backgroundColor: 0x000,
   scene: [
     BootScene,
-    MenuAScene,
-    MenuBScene,
-    MenuCScene
+    SplashScene,
+    MadeWithScene,
+    MainMenuScene,
+    OptionsScene,
+    CreditsScene,
+    HUDGameScene,
+    BaseGameScene,
+    PauseScene
   ]
 })
 
