@@ -1,11 +1,12 @@
 import Scene from '../scene'
+import getDataManager from '../../managers/dataManager'
 
 export default class PauseScene extends Scene {
-  constructor () {
-    super({key: 'pauseScene'})
+  constructor() {
+    super({ key: 'pauseScene' })
   }
 
-  create (params) {
+  create(params) {
     super.create(params)
     // objects
     let graphics = this.add.graphics()
@@ -20,6 +21,29 @@ export default class PauseScene extends Scene {
       text: 'back',
       onClick: (self) => {
         this.close()
+      },
+      onHover: (self) => {
+        self.setTint(0xff99ff)
+      },
+      onOut: (self) => {
+        self.setTint(0xffffff)
+      },
+      scale: 1.0
+    })
+
+    this.save = this.createButton({
+      x: 100,
+      y: 100,
+      font: 'keneyPixel',
+      text: 'save',
+      onClick: (self) => {
+        getDataManager().save({
+          data: {
+            level: 1,
+            playerName: 'Ph4s3r',
+            lifes: 2
+          }
+        })
       },
       onHover: (self) => {
         self.setTint(0xff99ff)
@@ -52,7 +76,7 @@ export default class PauseScene extends Scene {
 
     //events
 
-    this.events.on('shutdown', ()=>{
+    this.events.on('shutdown', () => {
       this.shutdown()
     }, this)
 
