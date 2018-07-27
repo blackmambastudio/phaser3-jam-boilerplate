@@ -67,7 +67,14 @@ export default class MainMenuScene extends Scene {
         font: 'keneyPixel',
         text: 'load',
         onClick: (self) => {
-          console.table(getDataManager().load())
+          getDataManager().load(null, true).then(data => {
+            if (typeof data === 'object') {
+              console.table(data)
+            }
+            else {
+              console.error(data)
+            }
+          })
         },
         onHover: (self) => {
           self.setTint(0xff99ff)
@@ -84,9 +91,11 @@ export default class MainMenuScene extends Scene {
         font: 'keneyPixel',
         text: 'delete stored data',
         onClick: (self) => {
+          // remove the data in window.localStorage
           getDataManager().delete()
-          this.load.destroy();
-          self.destroy();
+          // destroy the buttons related to saved data
+          this.load.destroy()
+          self.destroy()
         },
         onHover: (self) => {
           self.setTint(0xff99ff)

@@ -42,8 +42,10 @@ export default class PauseScene extends Scene {
             level: 1,
             playerName: 'Ph4s3r',
             lifes: 2
-          }
+          },
+          useHash: true
         })
+        // TODO: notify if the data was or not stored
       },
       onHover: (self) => {
         self.setTint(0xff99ff)
