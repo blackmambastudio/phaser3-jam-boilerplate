@@ -15,6 +15,7 @@ import BaseGameScene from './scenes/game/baseGame'
 import PauseScene from './scenes/ui/pause'
 
 import getSceneManager from './managers/sceneManager'
+import getDataManager from './managers/dataManager'
 
 window.game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -36,8 +37,9 @@ window.game = new Phaser.Game({
   ]
 })
 
-// init manager
+// init managers
 getSceneManager(window.game.scene)
+getDataManager()
 
 document.getElementById('game').focus()
 
