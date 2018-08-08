@@ -26,7 +26,6 @@ class SceneManager {
     this.scene.queueOp('start', key, data || {})
     this.scene.bringToTop(key)
     this.stack.push(key)
-    console.log(this.stack)
   }
 
   closeMenu (key) {
