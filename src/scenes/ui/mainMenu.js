@@ -15,7 +15,7 @@ export default class MainMenuScene extends Scene {
     // font key is the default font family set up in the
     // base "Scene" file.
     this.start = this.createButton({
-      x: 100,
+      x: 30,
       y: 100,
       style: this.fonts.BM_keney,
       text: this.getText('start'),
@@ -31,9 +31,9 @@ export default class MainMenuScene extends Scene {
       scale: 1.0
     })
 
-    // 2nd option to setup a style in a button
+    // 2nd option to setup a custom style in a button
     this.options = this.createButton({
-      x: 100,
+      x: 30,
       y: 150,
       style: {
         font: 'keneyPixel',
@@ -46,14 +46,14 @@ export default class MainMenuScene extends Scene {
     })
 
     this.credits = this.createButton({
-      x: 100,
+      x: 30,
       y: 200,
       keyText: 'credits',
       onClick: _ => this.open('creditsScene')
     })
 
     this.load = this.createButton({
-      x: 100,
+      x: 30,
       y: 250,
       keyText: 'load',
       onClick: (self) => {
@@ -69,7 +69,7 @@ export default class MainMenuScene extends Scene {
     })
 
     this.delete = this.createButton({
-      x: 100,
+      x: 30,
       y: 300,
       keyText: 'delete_data',
       onClick: (self) => {
@@ -87,23 +87,23 @@ export default class MainMenuScene extends Scene {
     }
 
     this.setLanguageButton = this.createButton({
-      x: 100,
+      x: 30,
       y: 350,
       keyText: 'language',
       onClick: (self) => {
         this.translator.changeLanguage()
-        this.refreshTexts()
+        this.updateLanguageTexts()
       }
     })
   }
 
-  refreshTexts () {
-    this.updateText(this.start, this.getText('start'))
-    this.updateText(this.options, this.getText('options'))
-    this.updateText(this.credits, this.getText('credits'))
-    this.updateText(this.load, this.getText('load'))
-    this.updateText(this.delete, this.getText('delete_data'))
-    this.updateText(this.setLanguageButton, this.getText('language'))
+  updateLanguageTexts () {
+    this.start.setText( this.getText('start') )
+    this.options.reloadText()
+    this.credits.reloadText()
+    this.load.reloadText()
+    this.delete.reloadText()
+    this.setLanguageButton.reloadText()
   }
 
 }
