@@ -3,7 +3,10 @@ import fonts from '../config/fonts'
 import getSceneManager from '../managers/sceneManager'
 import getTranslator from '../managers/translatorManager'
 
+import stats from '../utils/performance'
+
 import Button from '../gameObjects/button'
+
 
 export default class Scene extends Phaser.Scene {
   constructor (params) {
@@ -12,6 +15,10 @@ export default class Scene extends Phaser.Scene {
     this.fonts = fonts
 
     this.defaultBitmapStyle = fonts.BM_keney
+
+    if (constants.RUNNING_STATS) {
+      this.customTrackingStats = {}
+    }
   }
 
   preload () {
@@ -86,5 +93,16 @@ export default class Scene extends Phaser.Scene {
     }
     return this.translator.translate(val)
   }
+
+
+  update() {
+    if (constants.RUNNING_STATS) {
+      this.updateCustomStats()
+      stats.end(this.customTrackingStats)
+      stats.begin()
+    }
+  }
+
+  updateCustomStats() {}
 
 }

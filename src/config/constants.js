@@ -25,6 +25,9 @@ const DISPLAY_SCENE_TITLE = true
 // scene looks like
 const FAKE_LOADER_ACTIVE = false
 
+// display stats
+const RUNNING_STATS = true
+
 export default {
   WIDTH: 800 * SCALE,
   HEIGHT: 600 * SCALE,
@@ -34,5 +37,6 @@ export default {
   TIME_SPLASH,
   TIME_MADE_WITH,
   DISPLAY_SCENE_TITLE,
+  RUNNING_STATS,
   KEY: 'value'
 }

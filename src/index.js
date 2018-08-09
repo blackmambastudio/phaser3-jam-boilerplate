@@ -46,3 +46,4 @@ getDataManager()
 document.getElementById('game').focus()
 
 window.focus()
+
