@@ -12,18 +12,8 @@ export default class OptionsScene extends Scene {
     this.back = this.createButton({
       x: 100,
       y: 200,
-      font: 'keneyPixel',
-      text: this.getText('back'),
-      onClick: (self) => {
-        this.close()
-      },
-      onHover: (self) => {
-        self.setTint(0xff99ff)
-      },
-      onOut: (self) => {
-        self.setTint(0xffffff)
-      },
-      scale: 1.0
+      keyText: 'back',
+      onClick: _ => this.close()
     })
   }
 }

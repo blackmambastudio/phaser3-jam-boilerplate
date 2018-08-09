@@ -1,4 +1,5 @@
 import constants from '../config/constants'
+import fonts from '../config/fonts'
 import getSceneManager from '../managers/sceneManager'
 import getTranslator from '../managers/translatorManager'
 
@@ -6,6 +7,9 @@ export default class Scene extends Phaser.Scene {
   constructor (params) {
     super(params)
     this.constants = constants
+    this.fonts = fonts
+
+    this.defaultBitmapStyle = fonts.BM_keney
   }
 
   preload () {
@@ -24,10 +28,7 @@ export default class Scene extends Phaser.Scene {
       x: this.cameras.main.width / 2,
       y: 30,
       text: this.scene.key,
-      style: {
-          font: '20px monospace',
-          fill: '#ffffff'
-      }
+      style: this.fonts.default
     })
     this.titleText.setOrigin(0.5, 0.5)
     this.titleText.setVisible(this.constants.DISPLAY_SCENE_TITLE)
@@ -78,18 +79,34 @@ export default class Scene extends Phaser.Scene {
   }
 
   createButton (props) {
-    let button = this.add.bitmapText(props.x, props.y, props.font, props.text)
-    button.setTint(props.color)
-  
+    let style = props.style || this.defaultBitmapStyle
+    let text = props.keyText ? this.getText(props.keyText) : props.text
+    let button = this.add.bitmapText(
+      props.x,
+      props.y,
+      style.font,
+      text
+    )
+    button.setTint(style.color)
+
+    // register events
     button.setData('onClick', props.onClick)
-    button.setData('onHover', props.onHover)
-    button.setData('onOut', props.onOut)
+    let onHover = (self) => {
+      self.setTint(style.hoverColor)
+    }
+    button.setData('onHover', props.onHover || onHover)
+
+    let onOut = (self) => {
+      self.setTint(style.color)
+    }
+    button.setData('onOut', props.onOut || onOut)
+
     button.setData('type', 'button')
     button.setOrigin(0.5, 0.5)
     button.setData('location', {x: props.x, y: props.y})
 
     button.setInteractive(new Phaser.Geom.Rectangle(0, 0, button.width, button.height), Phaser.Geom.Rectangle.Contains)
-    button.setScale(props.scale || 1)
+    button.setScale(props.scale || style.scale)
     return button
   }
 
