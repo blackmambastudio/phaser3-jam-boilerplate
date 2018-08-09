@@ -27,6 +27,7 @@ export default class BaseGameScene extends Scene {
   }
 
   update () {
+    super.update()
     this.logo.rotation += this.rotationRatio
     if(this.logo.rotation>(Math.PI-0.1)) {
       this.laps++
@@ -39,5 +40,13 @@ export default class BaseGameScene extends Scene {
       this.registry.set('laps', this.laps)
       this.changeToScene('baseGameScene', {color: ~~(Math.random()*0xffffff), rotation: -this.rotationRatio})
     }
+
+  }
+
+  /**
+    only for performance
+  */
+  updateCustomStats() {
+    this.customTrackingStats.custom = this.laps
   }
 }

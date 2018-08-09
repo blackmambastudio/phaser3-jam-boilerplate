@@ -38,5 +38,8 @@ export default class HUDGameScene extends Scene {
       this.lapsText.setText(this.getText('laps', [data]))
     }
   }
+  
+  // dont  call the super update function....
+  update() {}
 
 }
