@@ -1,5 +1,7 @@
 import 'phaser'
 
+import constants from './config/constants'
+
 import BootScene from './scenes/ui/boot'
 
 import SplashScene from './scenes/ui/splash'
@@ -20,10 +22,10 @@ import getDataManager from './managers/dataManager'
 window.game = new Phaser.Game({
   type: Phaser.AUTO,
   parent: 'content',
-  width: 800,
-  height: 600,
+  width: constants.WIDTH,
+  height: constants.HEIGHT,
   canvas: document.getElementById('game'),
-  backgroundColor: 0x000,
+  backgroundColor: constants.BACKGROUND_COLOR,
   scene: [
     BootScene,
     SplashScene,
