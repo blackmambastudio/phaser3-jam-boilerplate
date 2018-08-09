@@ -3,7 +3,7 @@ import Scene from '../scene'
 export default class MadeWithScene extends Scene {
   constructor () {
     super({key: 'madeWithScene'})
-    this.timesplash = 1500
+    this.timesplash = this.constants.TIME_MADE_WITH
     this.nextScene = 'mainMenu'
   }
 

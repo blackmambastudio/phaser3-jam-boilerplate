@@ -1,9 +1,11 @@
+import constants from '../config/constants'
 import getSceneManager from '../managers/sceneManager'
 import getTranslator from '../managers/translatorManager'
 
 export default class Scene extends Phaser.Scene {
   constructor (params) {
     super(params)
+    this.constants = constants
   }
 
   preload () {
@@ -14,7 +16,10 @@ export default class Scene extends Phaser.Scene {
 
   create (params) {
     this.translator = getTranslator(this.cache)
+
     // display scene title
+    // *** feel free to delete this block
+    // if you don't want to display it
     this.titleText = this.make.text({
       x: this.cameras.main.width / 2,
       y: 30,
@@ -25,6 +30,8 @@ export default class Scene extends Phaser.Scene {
       }
     })
     this.titleText.setOrigin(0.5, 0.5)
+    this.titleText.setVisible(this.constants.DISPLAY_SCENE_TITLE)
+    // ***
 
     // handling events
     this.input.on('pointerdown', (pointer, gameObject) => {

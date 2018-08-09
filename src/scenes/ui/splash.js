@@ -3,7 +3,7 @@ import Scene from '../scene'
 export default class SplashScene extends Scene {
   constructor () {
     super({key: 'splashScene'})
-    this.timesplash = 1500
+    this.timesplash = this.constants.TIME_SPLASH
     this.nextScene = 'madeWithScene'
   }
 
