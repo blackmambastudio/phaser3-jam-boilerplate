@@ -1,4 +1,5 @@
 import getSceneManager from '../managers/sceneManager'
+import getTranslator from '../managers/translatorManager'
 
 export default class Scene extends Phaser.Scene {
   constructor (params) {
@@ -9,7 +10,10 @@ export default class Scene extends Phaser.Scene {
     this.sceneManager = getSceneManager(this.scene)
   }
 
+  init () {}
+
   create (params) {
+    this.translator = getTranslator(this.cache)
     // display scene title
     this.titleText = this.make.text({
       x: this.cameras.main.width / 2,
@@ -80,6 +84,22 @@ export default class Scene extends Phaser.Scene {
     button.setInteractive(new Phaser.Geom.Rectangle(0, 0, button.width, button.height), Phaser.Geom.Rectangle.Contains)
     button.setScale(props.scale || 1)
     return button
+  }
+
+  getText(val, params) {
+    if (params) {
+      return this.translator.translateWithParams(val, params)
+    }
+    return this.translator.translate(val)
+  }
+
+  updateText(bitmapText, text) {
+    bitmapText.setText(text)
+    let x = bitmapText.getData('location').x + bitmapText.getTextBounds().local.width/2
+    let y = bitmapText.getData('location').y + bitmapText.getTextBounds().local.height/2
+    bitmapText.setX(x)
+    bitmapText.setY(y)
+    bitmapText.setOrigin(0.5, 0.5)
   }
 
 }

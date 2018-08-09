@@ -50,7 +50,7 @@ class Translation {
 
   translateWithParams(val, params) {
     let translation = this.translate(val)
-    params.forEach((value, index)=>{
+    params.forEach((value, index) => {
       translation = translation.replace(`$[${index}]`, value)
     })
     return translation
@@ -80,6 +80,4 @@ let getTranslator = (cache) => {
   }
   return translator
 }
-export {
-  getTranslator
-}
+export default getTranslator

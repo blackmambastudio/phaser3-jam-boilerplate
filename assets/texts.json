@@ -2,11 +2,33 @@
 	"en": {
 		"newgame": "New Game",
 		"language": "Language",
-		"credits": "Made by Agar3s"
+		"back": "back",
+		"start": "start game",
+		"options": "options",
+		"credits": "credits",
+		"load": "load",
+		"delete_data": "delete stored data",
+		"save_data": "save",
+		"exit": "exit",
+		"pause": "pause",
+		"angle": "Angle: $[0]",
+		"laps": "Laps: $[0]",
+		"key": "value"
 	},
 	"es": {
 		"newgame": "Nuevo Juego",
 		"language": "Idioma",
-		"credits": "Hecho con <3 por Agar3s"
+		"back": "regresar",
+		"start": "iniciar juego",
+		"options": "opciones",
+		"credits": "creditos",
+		"load": "cargar",
+		"delete_data": "eliminar partida guardada",
+		"save_data": "guardar",
+		"exit": "salir",
+		"pause": "pausar",
+		"angle": "Angulo: $[0]",
+		"laps": "Vueltas: $[0]",
+		"key": "valor"
 	}
 }

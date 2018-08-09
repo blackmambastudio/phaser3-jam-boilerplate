@@ -12,7 +12,7 @@ export default class CreditsScene extends Scene {
       x: 100,
       y: 200,
       font: 'keneyPixel',
-      text: 'back',
+      text: this.getText('back'),
       onClick: (self) => {
         this.close()
       },
