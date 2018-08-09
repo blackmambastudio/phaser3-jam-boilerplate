@@ -13,7 +13,7 @@ export default class HUDGameScene extends Scene {
       x: 50,
       y: 50,
       font: 'keneyPixel',
-      text: 'pause',
+      text: this.getText('pause'),
       onClick: (self) => {
         this.sceneManager.overlay('pauseScene')
       },
@@ -30,9 +30,9 @@ export default class HUDGameScene extends Scene {
     this.titleText.x += 20
 
     // display and get notified when a value changes in the game
-    this.angleText = this.add.bitmapText(450, 550, 'keneyPixel', `Angle: ${this.registry.get('angle')}`)
+    this.angleText = this.add.bitmapText(450, 550, 'keneyPixel', this.getText('angle', [this.registry.get('angle')]))
     this.angleText.setTint(0xffffff)
-    this.lapsText = this.add.bitmapText(450, 570, 'keneyPixel', `Laps: ${this.registry.get('laps') || 0}`)
+    this.lapsText = this.add.bitmapText(450, 570, 'keneyPixel', this.getText('laps', [this.registry.get('laps') || 0]))
     this.lapsText.setTint(0xffffff)
 
     this.registry.events.on('changedata', this.updateData, this)
@@ -40,9 +40,10 @@ export default class HUDGameScene extends Scene {
 
   updateData (parent, key, data) {
     if (key === 'angle') {
-      this.angleText.setText(`Angle: ${data}`)
+      // I don't like this approach... but meanwhile it works...
+      this.angleText.setText(this.getText('angle', [data]))
     } else if(key === 'laps'){
-      this.lapsText.setText(`Laps: ${data}`)
+      this.lapsText.setText(this.getText('laps', [data]))
     }
   }
 

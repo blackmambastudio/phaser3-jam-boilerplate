@@ -18,7 +18,7 @@ export default class PauseScene extends Scene {
       x: 100,
       y: 200,
       font: 'keneyPixel',
-      text: 'back',
+      text: this.getText('back'),
       onClick: (self) => {
         this.close()
       },
@@ -35,7 +35,7 @@ export default class PauseScene extends Scene {
       x: 100,
       y: 100,
       font: 'keneyPixel',
-      text: 'save',
+      text: this.getText('save_data'),
       onClick: (self) => {
         getDataManager().save({
           data: {
@@ -60,7 +60,7 @@ export default class PauseScene extends Scene {
       x: 100,
       y: 150,
       font: 'keneyPixel',
-      text: 'exit',
+      text: this.getText('exit'),
       onClick: (self) => {
         this.changeToScene('mainMenu')
       },
