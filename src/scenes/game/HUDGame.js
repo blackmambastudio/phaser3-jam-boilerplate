@@ -15,14 +15,7 @@ export default class HUDGameScene extends Scene {
       text: this.getText('pause'),
       onClick: (self) => {
         this.sceneManager.overlay('pauseScene')
-      },
-      onHover: (self) => {
-        self.setTint(0xff99ff)
-      },
-      onOut: (self) => {
-        self.setTint(0xffffff)
-      },
-      scale: 1.0
+      }
     })
 
     this.titleText.y += 20

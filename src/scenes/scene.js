@@ -3,6 +3,8 @@ import fonts from '../config/fonts'
 import getSceneManager from '../managers/sceneManager'
 import getTranslator from '../managers/translatorManager'
 
+import Button from '../gameObjects/button'
+
 export default class Scene extends Phaser.Scene {
   constructor (params) {
     super(params)
@@ -39,29 +41,20 @@ export default class Scene extends Phaser.Scene {
       if (gameObject.length > 0) {
         let object = gameObject[0]
         if(object.getData('type') === 'button'){
-          let onClick = object.getData('onClick')
-          if (onClick) {
-            onClick(object)
-          }
+          object.onClick()
         }
       }
     })
     this.input.on('pointerover', (pointer, gameObject) => {
       let object = gameObject[0]
       if(object.getData('type') === 'button'){
-        let onHover = object.getData('onHover')
-          if (onHover) {
-            onHover(object)
-          }
+        object.onHover()
       }
     })
     this.input.on('pointerout', (pointer, gameObject) => {
       let object = gameObject[0]
       if(object.getData('type') === 'button'){
-        let onOut = object.getData('onOut')
-          if (onOut) {
-            onOut(object)
-          }
+        object.onOut()
       }
     })
   }
@@ -78,36 +71,13 @@ export default class Scene extends Phaser.Scene {
     this.sceneManager.changeToScene(sceneKey, data)
   }
 
+
   createButton (props) {
-    let style = props.style || this.defaultBitmapStyle
-    let text = props.keyText ? this.getText(props.keyText) : props.text
-    let button = this.add.bitmapText(
-      props.x,
-      props.y,
-      style.font,
-      text
-    )
-    button.setTint(style.color)
-
-    // register events
-    button.setData('onClick', props.onClick)
-    let onHover = (self) => {
-      self.setTint(style.hoverColor)
-    }
-    button.setData('onHover', props.onHover || onHover)
-
-    let onOut = (self) => {
-      self.setTint(style.color)
-    }
-    button.setData('onOut', props.onOut || onOut)
-
-    button.setData('type', 'button')
-    button.setOrigin(0.5, 0.5)
-    button.setData('location', {x: props.x, y: props.y})
-
-    button.setInteractive(new Phaser.Geom.Rectangle(0, 0, button.width, button.height), Phaser.Geom.Rectangle.Contains)
-    button.setScale(props.scale || style.scale)
-    return button
+    props.style = props.style || this.defaultBitmapStyle
+    return this.add.displayList.add(new Button({
+      scene: this,
+      ...props
+    }))
   }
 
   getText(val, params) {
@@ -115,15 +85,6 @@ export default class Scene extends Phaser.Scene {
       return this.translator.translateWithParams(val, params)
     }
     return this.translator.translate(val)
-  }
-
-  updateText(bitmapText, text) {
-    bitmapText.setText(text)
-    let x = bitmapText.getData('location').x + bitmapText.getTextBounds().local.width/2
-    let y = bitmapText.getData('location').y + bitmapText.getTextBounds().local.height/2
-    bitmapText.setX(x)
-    bitmapText.setY(y)
-    bitmapText.setOrigin(0.5, 0.5)
   }
 
 }
