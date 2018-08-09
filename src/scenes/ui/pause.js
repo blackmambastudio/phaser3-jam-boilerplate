@@ -17,25 +17,14 @@ export default class PauseScene extends Scene {
     this.back = this.createButton({
       x: 100,
       y: 200,
-      font: 'keneyPixel',
-      text: this.getText('back'),
-      onClick: (self) => {
-        this.close()
-      },
-      onHover: (self) => {
-        self.setTint(0xff99ff)
-      },
-      onOut: (self) => {
-        self.setTint(0xffffff)
-      },
-      scale: 1.0
+      keyText: 'back',
+      onClick: _ => this.close()
     })
 
     this.save = this.createButton({
       x: 100,
       y: 100,
-      font: 'keneyPixel',
-      text: this.getText('save_data'),
+      keyText: 'save_data',
       onClick: (self) => {
         getDataManager().save({
           data: {
@@ -46,31 +35,14 @@ export default class PauseScene extends Scene {
           useHash: true
         })
         // TODO: notify if the data was or not stored
-      },
-      onHover: (self) => {
-        self.setTint(0xff99ff)
-      },
-      onOut: (self) => {
-        self.setTint(0xffffff)
-      },
-      scale: 1.0
+      }
     })
 
     this.exit = this.createButton({
       x: 100,
       y: 150,
-      font: 'keneyPixel',
-      text: this.getText('exit'),
-      onClick: (self) => {
-        this.changeToScene('mainMenu')
-      },
-      onHover: (self) => {
-        self.setTint(0xff99ff)
-      },
-      onOut: (self) => {
-        self.setTint(0xffffff)
-      },
-      scale: 1.0
+      keyText: 'exit',
+      onClick: _ => this.changeToScene('mainMenu')
     })
 
     this.titleText.y += 40
@@ -78,10 +50,7 @@ export default class PauseScene extends Scene {
 
     //events
 
-    this.events.on('shutdown', () => {
-      this.shutdown()
-    }, this)
-
+    this.events.on('shutdown', _ => this.shutdown(), this)
     this.sceneManager.pauseGame()
   }
 

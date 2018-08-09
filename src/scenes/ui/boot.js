@@ -84,7 +84,7 @@ export default class BootScene extends Scene {
     // load logo
     this.load.spritesheet('logo', urlBase + 'assets/phaserLogo.png', { frameWidth: 382, frameHeight: 331 })    
     // load fonts
-    this.load.bitmapFont('keneyPixel', urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
+    this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
   
     // load json
     this.load.json('translations', urlBase + 'assets/texts.json')
