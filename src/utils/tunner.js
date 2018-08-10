@@ -37,6 +37,18 @@ function initGui() {
   folderScene.add(obj, 'restart').onChange((val) => {
     gs.notifyListener('scene.restart', true)
   })
+
+  folderScene.add(gs.stats.scene, 'current', [
+    'bootScene',
+    'splashScene',
+    'madeWithScene',
+    'mainMenu',
+    'optionsScene',
+    'creditsScene',
+    'baseGameScene'
+  ]).onChange((val) => {
+    gs.notifyListener('scene.current', val)
+  })
   folderScene.open()
 }
 

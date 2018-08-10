@@ -1,8 +1,11 @@
+import gs from '../config/gameStats'
+import tunner from '../utils/tunner'
+import constants from '../config/constants'
 
 class SceneManager {
   constructor (scenePlugin) {
     this.scene = scenePlugin
-    this.stack = ['bootScene']
+    this.stack = [gs.stats.scene.current]
     this.gameKeys = []
   }
 
@@ -15,6 +18,11 @@ class SceneManager {
     this.scene.queueOp('start', key, data || {})
     this.stack = [key]
     this.gameKeys = []
+
+    gs.stats.scene.current = key
+    if(constants.DAT_GUI_ENABLE) {
+      tunner.refresh()
+    }
   }
 
   openMenu (key, data) {

@@ -12,7 +12,8 @@ let stats = {
     }
   },
   scene: {
-    restart: false
+    restart: false,
+    current: 'bootScene'
   }
 }
 function getNames(property) {

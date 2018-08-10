@@ -61,4 +61,8 @@ if(constants.DAT_GUI_ENABLE) {
     gs.stats.scene.restart = false
     getSceneManager().restartScene()
   })
+
+  gs.setListener('scene.current', (val) => {
+    getSceneManager().changeToScene(val)
+  })
 }
