@@ -15,8 +15,7 @@ let stats = {
     restart: false
   }
 }
-
-let ids = (function getNames(property) {
+function getNames(property) {
   let names = []
   if(typeof(property)!=='object') {
     return [property]
@@ -37,8 +36,9 @@ let ids = (function getNames(property) {
     return [property]
   }
   return names
-})(stats)
-console.log(ids)
+}
+let ids = getNames(stats)
+
 
 let changeListeners = {}
 ids.forEach(id => changeListeners[id] = _ => {})
@@ -52,20 +52,42 @@ let removeListener = (id, listener) => {
   changeListeners[id] = _ => {}
 }
 
-
-let set = (key, newValue) => {
-  let parts = key.split('key')
-  let value = stats
+let get = (key, data = stats) => {
+  let parts = key.split('.')
+  let value = data
   for (var i = 0; i < parts.length; i++) {
     value = value[parts[i]]
   }
-  value = newValue
+  return value
+}
+
+let set = (key, newValue) => {
+  if(newValue === undefined) return
+  let parts = key.split('.')
+  let value = stats
+  for (var i = 0; i < parts.length - 1; i++) {
+    value = value[parts[i]]
+  }
+  value[parts[i]] = newValue
+  notifyListener(key, newValue)
+}
+
+let notifyListener = (key, newValue) => {
   changeListeners[key](newValue)
+}
+
+let setAll = (key, data) => {
+  let names = getNames(get(key))
+  names.forEach(name => {
+    set(`${key}.${name}`, get(name, data))
+  })
 }
 
 export default {
   stats,
   setListener,
   removeListener,
-  set
+  notifyListener,
+  set,
+  setAll
 }

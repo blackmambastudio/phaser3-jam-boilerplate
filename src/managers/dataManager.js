@@ -20,8 +20,10 @@ class DataManager {
       // TODO: add to the data to store a property with a unique value for making
       // even hard to decode the hash value.
       //   [ note ] this property won't be in the stored string
-
-      this.getSHA256(JSON.stringify(props.data)).then(hashValue => {
+      // assure there is no hashcode in the object
+      delete props.data.hashCode
+      let propsString = JSON.stringify(props.data)
+      this.getSHA256(propsString).then(hashValue => {
         props.data.hashCode = hashValue
         localStorage.setItem(props.key || this.localStorageKey, JSON.stringify(props.data))
       })

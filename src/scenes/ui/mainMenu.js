@@ -1,5 +1,7 @@
 import Scene from '../scene'
 import getDataManager from '../../managers/dataManager'
+import gs from '../../config/gameStats'
+import tunner from '../../utils/tunner'
 
 export default class MainMenuScene extends Scene {
   constructor() {
@@ -60,6 +62,11 @@ export default class MainMenuScene extends Scene {
         getDataManager().load(null, true).then(data => {
           if (typeof data === 'object') {
             console.table(data)
+            gs.setAll('mainScene', data)
+            if(this.constants.DAT_GUI_ENABLE) {
+              tunner.refresh()
+            }
+            this.changeToScene('baseGameScene')
           }
           else {
             console.error(data)
