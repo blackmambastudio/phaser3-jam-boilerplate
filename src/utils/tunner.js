@@ -10,7 +10,7 @@ function initGui() {
   gui.remember(gs.stats.game)
   folderGame.addColor(gs.stats.game, 'backgroundColor')
   .onChange((val) => {
-    gs.set('game.backgroundColor', val)
+    gs.notifyListener('game.backgroundColor', val)
   })
   folderGame.open()
 
@@ -18,24 +18,24 @@ function initGui() {
   gui.remember(gs.stats.mainScene, gs.stats.mainScene.logoPosition)
   folderMain.add(gs.stats.mainScene, 'rotationRatio', -0.12, 0.12)
   .onChange((val) => {
-    gs.set('mainScene.rotationRatio', val)
+    gs.notifyListener('mainScene.rotationRatio', val)
   })
 
   folderMain.add(gs.stats.mainScene.logoPosition, 'x', 0, 800)
   .onChange((val) => {
-    gs.set('mainScene.logoPosition.x', val)
+    gs.notifyListener('mainScene.logoPosition.x', val)
   })
 
   folderMain.add(gs.stats.mainScene.logoPosition, 'y', 0, 600)
   .onChange((val) => {
-    gs.set('mainScene.logoPosition.y', val)
+    gs.notifyListener('mainScene.logoPosition.y', val)
   })
   folderMain.open()
 
   let folderScene = gui.addFolder('Current Scene')
   var obj = {'restart': function(){}}
   folderScene.add(obj, 'restart').onChange((val) => {
-    gs.set('scene.restart', true)
+    gs.notifyListener('scene.restart', true)
   })
   folderScene.open()
 }
@@ -48,5 +48,14 @@ if(constants.DAT_GUI_ENABLE) {
   initGui()
 }
 
-export default gui
+let refresh = () => {
+  Object.keys(gui.__folders).forEach(key => {
+    let folder = gui.__folders[key]
+    for (var i in folder.__controllers) {
+      folder.__controllers[i].updateDisplay()
+    }
+  })
+}
+
+export default {gui, refresh}
 

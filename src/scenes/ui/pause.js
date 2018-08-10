@@ -1,5 +1,6 @@
 import Scene from '../scene'
 import getDataManager from '../../managers/dataManager'
+import gs from '../../config/gameStats'
 
 export default class PauseScene extends Scene {
   constructor() {
@@ -27,11 +28,7 @@ export default class PauseScene extends Scene {
       keyText: 'save_data',
       onClick: (self) => {
         getDataManager().save({
-          data: {
-            level: 1,
-            playerName: 'Ph4s3r',
-            lifes: 2
-          },
+          data: gs.stats.mainScene,
           useHash: true
         })
         // TODO: notify if the data was or not stored
