@@ -75,6 +75,18 @@ class SceneManager {
       this.scene.queueOp('resume', gameKey)
     })
   }
+
+  restartScene () {
+    let key = this.stack[0]
+    this.stack.forEach(sceneKey => {
+      this.scene.queueOp('stop', sceneKey)
+      this.removeGameScene(sceneKey)
+    })
+
+    this.scene.queueOp('start', key, {})
+    this.stack = [key]
+    this.gameKeys = []
+  }
 }
 
 // unique instance
