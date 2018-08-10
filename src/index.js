@@ -19,6 +19,9 @@ import PauseScene from './scenes/ui/pause'
 import getSceneManager from './managers/sceneManager'
 import getDataManager from './managers/dataManager'
 
+import gs from './config/gameStats'
+import tunner from './utils/tunner'
+
 window.game = new Phaser.Game({
   type: Phaser.AUTO,
   parent: 'content',
@@ -44,6 +47,18 @@ getSceneManager(window.game.scene)
 getDataManager()
 
 document.getElementById('game').focus()
-
 window.focus()
 
+
+// how it works with game context?
+if(constants.DAT_GUI_ENABLE) {
+  gs.setListener('game.backgroundColor', (val) => {
+    let color = Phaser.Display.Color.HexStringToColor(val)
+    game.renderer.config.backgroundColor = color
+  })
+
+  gs.setListener('scene.restart', (val) => {
+    gs.stats.scene.restart = false
+    getSceneManager().restartScene()
+  })
+}

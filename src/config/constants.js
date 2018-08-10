@@ -28,6 +28,9 @@ const FAKE_LOADER_ACTIVE = false
 // display stats
 const RUNNING_STATS = true
 
+// display dat.gui plugin
+const DAT_GUI_ENABLE = true
+
 export default {
   WIDTH: 800 * SCALE,
   HEIGHT: 600 * SCALE,
@@ -38,5 +41,6 @@ export default {
   TIME_MADE_WITH,
   DISPLAY_SCENE_TITLE,
   RUNNING_STATS,
+  DAT_GUI_ENABLE,
   KEY: 'value'
 }
