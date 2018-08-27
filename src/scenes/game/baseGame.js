@@ -16,16 +16,18 @@ export default class BaseGameScene extends Scene {
     this.sceneManager.addGameScene(this.scene.key)
     this.sceneManager.overlay('HUDGameScene')
 
-    this.logoPosition = {
+    this.actorPosition = {
       x: gs.stats.mainScene.logoPosition.x || this.cameras.main.width/2,
       y: gs.stats.mainScene.logoPosition.y || this.cameras.main.height/2
     }
 
-    this.logo = this.add.sprite(this.logoPosition.x, this.logoPosition.y, 'logo')
-    this.logo.setTint(params.color || 0xffffff)
+    this.actor = this.addActor(this.actorPosition.x, this.actorPosition.y, 'skeleton', 'skeleton-idle-001.png')
+    this.actor.setScale(10);
+    this.actor.setTint(params.color || 0xffffff)
     this.events.on('shutdown', () => {
       this.shutdown()
     }, this)
+
 
     
     // load gui
@@ -34,10 +36,10 @@ export default class BaseGameScene extends Scene {
         this.rotationRatio = val
       })
       gs.setListener('mainScene.logoPosition.x', (val) => {
-        this.logo.x = val
+        this.actor.x = val
       })
       gs.setListener('mainScene.logoPosition.y', (val) => {
-        this.logo.y = val
+        this.actor.y = val
       })
     }
   }
@@ -55,12 +57,12 @@ export default class BaseGameScene extends Scene {
 
   update () {
     super.update()
-    this.logo.rotation += this.rotationRatio
-    if(this.logo.rotation>(Math.PI-0.1)) {
+    this.actor.rotation += this.rotationRatio
+    if(this.actor.rotation>(Math.PI-0.1)) {
       this.laps++
       this.registry.set('laps', this.laps)
     }
-    this.registry.set('angle', this.logo.rotation)
+    this.registry.set('angle', this.actor.rotation)
 
     if (this.laps == 2) {
       this.laps = 0

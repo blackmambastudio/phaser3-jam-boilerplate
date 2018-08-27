@@ -29,6 +29,7 @@ window.game = new Phaser.Game({
   height: constants.HEIGHT,
   canvas: document.getElementById('game'),
   backgroundColor: constants.BACKGROUND_COLOR,
+  pixelArt: true,
   scene: [
     BootScene,
     SplashScene,

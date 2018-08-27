@@ -7,7 +7,7 @@ export default class BootScene extends Scene {
   constructor () {
     super({key: 'bootScene'})
 
-    this.nextScene = 'splashScene'
+    this.nextScene = this.constants.AFTER_BOOT_SCENE;
   }
 
   preload () {
@@ -82,7 +82,15 @@ export default class BootScene extends Scene {
       urlBase = awsPrefix
     }
     // load logo
-    this.load.spritesheet('logo', urlBase + 'assets/phaserLogo.png', { frameWidth: 382, frameHeight: 331 })    
+    this.load.spritesheet('logo', urlBase + 'assets/phaserLogo.png', { frameWidth: 382, frameHeight: 331 })
+
+    // load sprite atlas
+    this.load.atlas(
+      'skeleton',
+      'assets/sprites/skeleton.png',
+      'assets/sprites/skeleton.json'
+    );
+
     // load fonts
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
   

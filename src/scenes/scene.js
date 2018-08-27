@@ -6,6 +6,7 @@ import getTranslator from '../managers/translatorManager'
 import stats from '../utils/performance'
 
 import Button from '../gameObjects/button'
+import Actor from '../gameObjects/actor'
 
 
 export default class Scene extends Phaser.Scene {
@@ -101,6 +102,23 @@ export default class Scene extends Phaser.Scene {
       stats.end(this.customTrackingStats)
       stats.begin()
     }
+  }
+
+  addActor(x, y, key, frame) {
+    let sprite = new Actor({scene: this, x, y, key, frame})
+    this.add.displayList.add(sprite)
+    this.add.updateList.add(sprite)
+    return sprite
+  }
+
+  generateFrameNames(key, animationId, end) {
+    return this.anims.generateFrameNames(key, {
+      start: 1,
+      end: end || 2,
+      zeroPad: 3,
+      prefix: `${animationId}-`,
+      suffix: '.png'
+    })
   }
 
   updateCustomStats() {}
