@@ -15,6 +15,13 @@
 		"oncomplete": {
 			"trigger": "set",
 			"values": ["idle"]
+		},
+		"sound": {
+			"name": "fx_skeleton_awake",
+			"config": {
+				"volume": 0.4
+			},
+			"play": {}
 		}
 	},
 	"idle": {
@@ -38,13 +45,29 @@
 			"trigger": "triggerOnActor",
 			"values": ["applyDamage", []],
 			"frame": 2
+		},
+		"sound": {
+			"name": "fx_skeleton_attack",
+			"config": {
+				"volume": 0.4
+			},
+			"play": {}
 		}
 	},
 	"walk": {
 		"anim": {
 			"totalFrames": 2,
-			"duration": 600,
+			"duration": 300,
 			"repeat": -1
+		},
+		"sound": {
+			"name": "fx_skeleton_fs",
+			"config": {
+				"volume": 0.4
+			},
+			"play": {
+				"loop": true
+			}
 		}
 	},
 	"alert": {
@@ -52,6 +75,13 @@
 			"totalFrames": 1,
 			"duration": 400,
 			"repeat": 0
+		},
+		"sound": {
+			"name": "fx_skeleton_alarm",
+			"config": {
+				"volume": 0.4
+			},
+			"play": {}
 		}
 	},
 	"hit": {
@@ -63,6 +93,13 @@
 		"oncomplete": {
 			"trigger": "set",
 			"values": ["idle"]
+		},
+		"sound": {
+			"name": "fx_skeleton_hurt",
+			"config": {
+				"volume": 0.4
+			},
+			"play": {}
 		}
 	},
 	"stun": {
@@ -70,6 +107,13 @@
 			"totalFrames": 2,
 			"frameRate": 10,
 			"repeat": -1
+		},
+		"sound": {
+			"name": "fx_skeleton_stunned",
+			"config": {
+				"volume": 0.4
+			},
+			"play": {}
 		}
 	}
 }

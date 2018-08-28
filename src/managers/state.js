@@ -6,10 +6,14 @@ export default class StateHandler {
     this.stateNames = Object.keys(this.stateconfig)
     this.state = ''
     params.actor.setStateHandler(this)
+    this.sounds = []
+    this.registerSounds()
   }
 
   set(stateKey) {
+    console.log('set status', stateKey)
     this.removeEvents()
+    this.stopSounds()
     this.status = stateKey
     this.state = this.stateconfig[stateKey] 
     this.actor.anims.play(this.state.anim.key)
@@ -19,6 +23,10 @@ export default class StateHandler {
     }
     if(this.state.onupdate) {
       this.actor.on('animationupdate', this.onAnimationUpdate, this)
+    }
+    let sound = this.state.sound
+    if(sound) {
+      this.sounds[sound.name].play(sound.play)
     }
   }
 
@@ -42,5 +50,19 @@ export default class StateHandler {
 
   triggerOnActor(method, values) {
     this.actor[method](...values)
+  }
+
+  registerSounds() {
+    this.stateNames.forEach(stateName => {
+      let sound = this.stateconfig[stateName].sound
+      if(!sound) return
+      this.sounds[sound.name] = this.actor.scene.sound.add(sound.name, sound)
+    })
+  }
+
+  stopSounds() {
+    Object.keys(this.sounds).forEach(soundKey => {
+      this.sounds[soundKey].stop()
+    })
   }
 }

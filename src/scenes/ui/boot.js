@@ -92,6 +92,15 @@ export default class BootScene extends Scene {
     );
     this.load.json('skeleton_states', urlBase + 'assets/sprites/skeleton_states.json')
 
+    // load audio
+    this.load.audio('fx_skeleton_alarm', urlBase+'assets/audio/fx/Skeleton_Alarm.ogg')
+    this.load.audio('fx_skeleton_attack', urlBase+'assets/audio/fx/Skeleton_Attack.ogg')
+    this.load.audio('fx_skeleton_awake', urlBase+'assets/audio/fx/Skeleton_Awake.ogg')
+    this.load.audio('fx_skeleton_fs', urlBase+'assets/audio/fx/Skeleton_FS.ogg')
+    this.load.audio('fx_skeleton_hurt', urlBase+'assets/audio/fx/Skeleton_Hurt.ogg')
+    this.load.audio('fx_skeleton_impact_01', urlBase+'assets/audio/fx/Skeleton_Impact_01.ogg')
+    this.load.audio('fx_skeleton_impact_02', urlBase+'assets/audio/fx/Skeleton_Impact_02.ogg')
+    this.load.audio('fx_skeleton_stunned', urlBase+'assets/audio/fx/Skeleton_Stunned.ogg')
     // load fonts
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
   
