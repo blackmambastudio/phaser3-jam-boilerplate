@@ -57,7 +57,7 @@ export default class StateHandler {
     this.stateNames.forEach(stateName => {
       let sound = this.stateconfig[stateName].sound
       if(!sound) return
-      this.sounds[sound.name] = this.actor.scene.sound.add(sound.name, sound)
+      this.sounds[sound.name] = this.actor.scene.sound.add(sound.name, sound.config)
     })
   }
 

@@ -139,7 +139,6 @@ export default class Scene extends Phaser.Scene {
         }
       }
     })
-    console.log(this.anims)
     return config
   }
 
