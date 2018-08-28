@@ -11,11 +11,11 @@ export default class StateHandler {
   }
 
   set(stateKey) {
-    if(this.stateNames.indexOf(stateKey) === -1) return
+    this.status = stateKey
+    if(this.stateNames.indexOf(this.status) === -1) return
 
     this.removeEvents()
     this.stopSounds()
-    this.status = stateKey
     this.state = this.stateconfig[stateKey] 
     this.actor.anims.play(this.state.anim.key)
 
