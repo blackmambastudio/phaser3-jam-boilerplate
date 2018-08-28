@@ -4,13 +4,13 @@ import Scene from '../scene'
 const env = 'DEV'
 
 export default class BootScene extends Scene {
-  constructor () {
-    super({key: 'bootScene'})
+  constructor() {
+    super({ key: 'bootScene' })
 
-    this.nextScene = this.constants.AFTER_BOOT_SCENE;
+    this.nextScene = this.constants.AFTER_BOOT_SCENE
   }
 
-  preload () {
+  preload() {
     super.preload()
 
     let progressBox = this.add.graphics()
@@ -34,8 +34,8 @@ export default class BootScene extends Scene {
       y: height / 2 + 25,
       text: '0%',
       style: {
-          font: '20px monospace',
-          fill: '#999999'
+        font: '20px monospace',
+        fill: '#999999'
       }
     })
     percentText.setOrigin(0.5, 0.5)
@@ -52,20 +52,24 @@ export default class BootScene extends Scene {
     assetText.setOrigin(0.5, 0.5)
 
     progressBox.fillStyle(0x666666, 1)
-    progressBox.fillRect(width/2 - 160, height/2, 320, 50)
+    progressBox.fillRect(width / 2 - 160, height / 2, 320, 50)
 
-
-    this.load.on('progress', (value) => {
+    this.load.on('progress', value => {
       progressBar.clear()
       progressBar.fillStyle(0x333333, 1)
-      progressBar.fillRect(width/2 + 10 - 160, height/2 + 10, 300 * value, 30)
+      progressBar.fillRect(
+        width / 2 + 10 - 160,
+        height / 2 + 10,
+        300 * value,
+        30
+      )
       percentText.setText(parseInt(value * 100) + '%')
     })
-                
-    this.load.on('fileprogress', (file) => {
+
+    this.load.on('fileprogress', file => {
       assetText.setText(file.key + ' ready')
     })
-     
+
     this.load.on('complete', () => {
       progressBar.destroy()
       progressBox.destroy()
@@ -78,39 +82,76 @@ export default class BootScene extends Scene {
 
     // load files
     let urlBase = ''
-    if(env == 'PRODUCTION') {
+    if (env == 'PRODUCTION') {
       urlBase = awsPrefix
     }
     // load logo
-    this.load.spritesheet('logo', urlBase + 'assets/phaserLogo.png', { frameWidth: 382, frameHeight: 331 })
+    this.load.spritesheet('logo', urlBase + 'assets/phaserLogo.png', {
+      frameWidth: 382,
+      frameHeight: 331
+    })
 
     // load sprite atlas
     this.load.atlas(
       'skeleton',
       'assets/sprites/skeleton.png',
       'assets/sprites/skeleton.json'
-    );
-    this.load.json('skeleton_states', urlBase + 'assets/sprites/skeleton_states.json')
+    )
+    this.load.json(
+      'skeleton_states',
+      urlBase + 'assets/sprites/skeleton_states.json'
+    )
 
     // load audio
-    this.load.audio('fx_skeleton_alarm', urlBase+'assets/audio/fx/Skeleton_Alarm.ogg')
-    this.load.audio('fx_skeleton_attack', urlBase+'assets/audio/fx/Skeleton_Attack.ogg')
-    this.load.audio('fx_skeleton_awake', urlBase+'assets/audio/fx/Skeleton_Awake.ogg')
-    this.load.audio('fx_skeleton_fs', urlBase+'assets/audio/fx/Skeleton_FS.ogg')
-    this.load.audio('fx_skeleton_hurt', urlBase+'assets/audio/fx/Skeleton_Hurt.ogg')
-    this.load.audio('fx_skeleton_impact_01', urlBase+'assets/audio/fx/Skeleton_Impact_01.ogg')
-    this.load.audio('fx_skeleton_impact_02', urlBase+'assets/audio/fx/Skeleton_Impact_02.ogg')
-    this.load.audio('fx_skeleton_stunned', urlBase+'assets/audio/fx/Skeleton_Stunned.ogg')
+    this.load.audio(
+      'fx_skeleton_alarm',
+      urlBase + 'assets/audio/fx/Skeleton_Alarm.ogg'
+    )
+    this.load.audio(
+      'fx_skeleton_attack',
+      urlBase + 'assets/audio/fx/Skeleton_Attack.ogg'
+    )
+    this.load.audio(
+      'fx_skeleton_awake',
+      urlBase + 'assets/audio/fx/Skeleton_Awake.ogg'
+    )
+    this.load.audio(
+      'fx_skeleton_fs',
+      urlBase + 'assets/audio/fx/Skeleton_FS.ogg'
+    )
+    this.load.audio(
+      'fx_skeleton_hurt',
+      urlBase + 'assets/audio/fx/Skeleton_Hurt.ogg'
+    )
+    this.load.audio(
+      'fx_skeleton_impact_01',
+      urlBase + 'assets/audio/fx/Skeleton_Impact_01.ogg'
+    )
+    this.load.audio(
+      'fx_skeleton_impact_02',
+      urlBase + 'assets/audio/fx/Skeleton_Impact_02.ogg'
+    )
+    this.load.audio(
+      'fx_skeleton_stunned',
+      urlBase + 'assets/audio/fx/Skeleton_Stunned.ogg'
+    )
     // load fonts
-    this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
-  
+    this.load.bitmapFont(
+      this.fonts.BM_keney.font,
+      urlBase + 'assets/fonts/keneyFont_0.png',
+      urlBase + 'assets/fonts/keneyFont.fnt'
+    )
+
     // load json
     this.load.json('translations', urlBase + 'assets/texts.json')
 
     // fake loader
     if (this.constants.FAKE_LOADER_ACTIVE) {
       for (var i = 0; i < 500; i++) {
-        this.load.spritesheet(`logo-${i}`, urlBase + 'assets/phaserLogo.png', { frameWidth: 382, frameHeight: 331 })
+        this.load.spritesheet(`logo-${i}`, urlBase + 'assets/phaserLogo.png', {
+          frameWidth: 382,
+          frameHeight: 331
+        })
       }
     }
   }

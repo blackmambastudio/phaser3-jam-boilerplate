@@ -27,6 +27,7 @@ window.game = new Phaser.Game({
   parent: 'content',
   width: constants.WIDTH,
   height: constants.HEIGHT,
+  parent: document.getElementById('gameContainer'),
   canvas: document.getElementById('game'),
   backgroundColor: constants.BACKGROUND_COLOR,
   pixelArt: true,
@@ -46,6 +47,10 @@ window.game = new Phaser.Game({
 // init managers
 getSceneManager(window.game.scene)
 getDataManager()
+
+document.getElementById('fullScreen').onclick = () => {
+  window['game']['canvas'][game.device.fullscreen.request]()
+}
 
 document.getElementById('game').focus()
 window.focus()

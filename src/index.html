@@ -1,17 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Phaser3 - JAM Boilerplate</title>
 	<style>
-	.dg.ac {
-		top: 50px !important;
-	}
-	.dg main a {
-		margin: 0;
-	}
+		/* ┌ canvas styles ─────────────────────────────────────────────────────┐ */
+		html,
+		body {
+			margin: 0;
+			box-sizing: border-box;
+			background-color: #000;
+		}
+
+		.boilerplate-wrapper {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+		}
+
+		.boilerplate-wrapper .gameContainer {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			position: relative;
+			width: 800px;
+			height: 600px;
+			border: 2px solid#009faa;
+		}
+
+		.footer {
+			margin-top: 5px;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.footer .fullscreen-btn {
+			background-color: #f47e22;
+			color: #fff;
+			padding: 0;
+			margin: 0;
+			border: 2px solid#ff0d0d;
+			width: 40px;
+			font-size: 24px;
+		}
+
+		/* └────────────────────────────────────────────────────────────────────┘ */
+		/* ┌ dat.GUI styles ────────────────────────────────────────────────────┐ */
+		.dg.ac {
+			top: 50px !important;
+		}
+
+		.dg main a {
+			margin: 0;
+		}
+
+		/* └────────────────────────────────────────────────────────────────────┘ */
 	</style>
 </head>
+
 <body>
-	<canvas id='game' autofocus></canvas>
+	<div class="boilerplate-wrapper">
+		<div class="gameContainer">
+			<canvas id='game' autofocus></canvas>
+		</div>
+		<div class="footer">
+			<img src="assets/phaserLogoSmall.png" alt="Phaser 3 logo" class="phaser-logo">
+			<button id="fullScreen" class="fullscreen-btn">&#x2922;</button>
+		</div>
+	</div>
 </body>
+
 </html>

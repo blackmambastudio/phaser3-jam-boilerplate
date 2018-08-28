@@ -2,7 +2,8 @@
 // base game stats
 let stats = {
   game: {
-    backgroundColor: '#000'
+    backgroundColor: '#000',
+    language: 'en'
   },
   mainScene: {
     rotationRatio: 0.00,

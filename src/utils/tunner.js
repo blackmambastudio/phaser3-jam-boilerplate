@@ -12,6 +12,12 @@ function initGui() {
   .onChange((val) => {
     gs.notifyListener('game.backgroundColor', val)
   })
+  folderGame.add(gs.stats.game, 'language', [
+    'en',
+    'es'
+  ]).onChange((val) => {
+    gs.notifyListener('game.language', val)
+  })
   folderGame.open()
 
   let folderMain = gui.addFolder('main scene')
