@@ -1,0 +1,75 @@
+{
+	"resting": {
+		"anim": {
+			"totalFrames": 1,
+			"frameRate": 10,
+			"repeat": 0
+		}
+	},
+	"wake": {
+		"anim": {
+			"totalFrames": 4,
+			"repeat": 0,
+			"duration": 350
+		},
+		"oncomplete": {
+			"trigger": "set",
+			"values": ["idle"]
+		}
+	},
+	"idle": {
+		"anim": {
+			"totalFrames": 8,
+			"frameRate": 10,
+			"repeat": -1
+		}
+	},
+	"attack": {
+		"anim": {
+			"totalFrames": 2,
+			"duration": 300,
+			"repeat": 0
+		},
+		"oncomplete": {
+			"trigger": "triggerOnActor",
+			"values": ["change", []]
+		},
+		"onupdate": {
+			"trigger": "triggerOnActor",
+			"values": ["applyDamage", []],
+			"frame": 2
+		}
+	},
+	"walk": {
+		"anim": {
+			"totalFrames": 2,
+			"duration": 600,
+			"repeat": -1
+		}
+	},
+	"alert": {
+		"anim": {
+			"totalFrames": 1,
+			"duration": 400,
+			"repeat": 0
+		}
+	},
+	"hit": {
+		"anim": {
+			"totalFrames": 2,
+			"frameRate": 10,
+			"repeat": 0
+		},
+		"oncomplete": {
+			"trigger": "set",
+			"values": ["idle"]
+		}
+	},
+	"stun": {
+		"anim": {
+			"totalFrames": 2,
+			"frameRate": 10,
+			"repeat": -1
+		}
+	}
+}

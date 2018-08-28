@@ -5,7 +5,7 @@ let stats = {
     backgroundColor: '#000'
   },
   mainScene: {
-    rotationRatio: 0.01,
+    rotationRatio: 0.00,
     logoPosition: {
       x: 400,
       y: 300

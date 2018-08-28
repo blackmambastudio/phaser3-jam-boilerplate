@@ -90,6 +90,7 @@ export default class BootScene extends Scene {
       'assets/sprites/skeleton.png',
       'assets/sprites/skeleton.json'
     );
+    this.load.json('skeleton_states', urlBase + 'assets/sprites/skeleton_states.json')
 
     // load fonts
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')

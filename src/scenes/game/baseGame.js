@@ -1,5 +1,6 @@
 import Scene from '../scene'
 import gs from '../../config/gameStats'
+import Skeleton from '../../gameObjects/skeleton'
 
 export default class BaseGameScene extends Scene {
   constructor () {
@@ -11,7 +12,7 @@ export default class BaseGameScene extends Scene {
     super.create(params)
     this.id = Math.random()
     this.laps = 0
-    this.rotationRatio = gs.stats.mainScene.rotationRatio || params.rotation || 0.01
+    this.rotationRatio = gs.stats.mainScene.rotationRatio || params.rotation || 0
     
     this.sceneManager.addGameScene(this.scene.key)
     this.sceneManager.overlay('HUDGameScene')
@@ -21,9 +22,19 @@ export default class BaseGameScene extends Scene {
       y: gs.stats.mainScene.logoPosition.y || this.cameras.main.height/2
     }
 
-    this.actor = this.addActor(this.actorPosition.x, this.actorPosition.y, 'skeleton', 'skeleton-idle-001.png')
-    this.actor.setScale(10);
+    let skeleton = new Skeleton({
+      scene: this,
+      x: this.actorPosition.x,
+      y: this.actorPosition.y,
+      key: 'skeleton',
+      frame: 'skeleton-idle-001.png'
+    })
+    this.actor = this.addActor(skeleton)
+    this.actor.setScale(10)
     this.actor.setTint(params.color || 0xffffff)
+
+    this.actor.change()
+
     this.events.on('shutdown', () => {
       this.shutdown()
     }, this)
@@ -69,7 +80,6 @@ export default class BaseGameScene extends Scene {
       this.registry.set('laps', this.laps)
       this.changeToScene('baseGameScene', {color: ~~(Math.random()*0xffffff), rotation: -this.rotationRatio})
     }
-
   }
 
   /**

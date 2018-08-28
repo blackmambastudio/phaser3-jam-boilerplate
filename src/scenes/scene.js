@@ -2,11 +2,11 @@ import constants from '../config/constants'
 import fonts from '../config/fonts'
 import getSceneManager from '../managers/sceneManager'
 import getTranslator from '../managers/translatorManager'
+import StateHandler from '../managers/state'
 
 import stats from '../utils/performance'
 
 import Button from '../gameObjects/button'
-import Actor from '../gameObjects/actor'
 
 
 export default class Scene extends Phaser.Scene {
@@ -104,10 +104,14 @@ export default class Scene extends Phaser.Scene {
     }
   }
 
-  addActor(x, y, key, frame) {
-    let sprite = new Actor({scene: this, x, y, key, frame})
+  addActor(sprite) {
     this.add.displayList.add(sprite)
     this.add.updateList.add(sprite)
+
+    let stateHandler = new StateHandler({
+      states: this.loadState(sprite.texture.key),
+      actor: sprite
+    })
     return sprite
   }
 
@@ -119,6 +123,24 @@ export default class Scene extends Phaser.Scene {
       prefix: `${animationId}-`,
       suffix: '.png'
     })
+  }
+
+  loadState (key) {
+    let config = this.cache.json.get(`${key}_states`)
+    let states = Object.keys(config)
+    states.forEach(stateName => {
+      let state = config[stateName]
+      let anim = state.anim
+      if (anim) {
+        anim.key = `${key}-${stateName}`
+        if (!this.anims.anims.entries[anim.key]) {
+          anim.frames = this.generateFrameNames(key, anim.key, anim.totalFrames)
+          this.anims.create(anim)
+        }
+      }
+    })
+    console.log(this.anims)
+    return config
   }
 
   updateCustomStats() {}
