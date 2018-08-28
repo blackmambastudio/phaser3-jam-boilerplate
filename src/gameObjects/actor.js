@@ -11,8 +11,19 @@ export default class Actor extends Phaser.GameObjects.Sprite {
 
   destroy() {
     super.destroy()
-    this.stateHandler.removeEvents()
-    this.stateHandler.stopSounds()
+    this.stateHandler.destroy()
     console.log('destroy me!')
+  }
+
+  setStatus(status) {
+    this.stateHandler.set(status)
+  }
+
+  pause() {
+    this.stateHandler.pause()
+  }
+
+  resume() {
+    this.stateHandler.resume()
   }
 }

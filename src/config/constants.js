@@ -31,7 +31,7 @@ const RUNNING_STATS = true
 // display dat.gui plugin
 const DAT_GUI_ENABLE = true
 
-const AFTER_BOOT_SCENE = 'baseGameScene'
+const AFTER_BOOT_SCENE = 'splashScene'
 
 export default {
   WIDTH: 800 * SCALE,

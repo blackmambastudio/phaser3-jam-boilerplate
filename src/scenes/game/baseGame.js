@@ -33,24 +33,27 @@ export default class BaseGameScene extends Scene {
     this.actor.setScale(10)
     this.actor.setTint(params.color || 0xffffff)
 
-    this.actor.change()
+    this.actor.setStatus(gs.stats.actor.state)
 
-    this.events.on('shutdown', () => {
-      this.shutdown()
-    }, this)
+    this.events.on('shutdown', _ => this.shutdown(), this)
 
+    this.events.on('pause', _ => this.pause(), this)
+    this.events.on('resume', _ => this.resume(), this)
 
     
     // load gui
     if(this.constants.DAT_GUI_ENABLE) {     
-      gs.setListener('mainScene.rotationRatio', (val) => {
+      gs.setListener('mainScene.rotationRatio', val => {
         this.rotationRatio = val
       })
-      gs.setListener('mainScene.logoPosition.x', (val) => {
+      gs.setListener('mainScene.logoPosition.x', val => {
         this.actor.x = val
       })
-      gs.setListener('mainScene.logoPosition.y', (val) => {
+      gs.setListener('mainScene.logoPosition.y', val => {
         this.actor.y = val
+      })
+      gs.setListener('actor.state', val => {
+        this.actor.setStatus(val)
       })
     }
   }
@@ -63,6 +66,7 @@ export default class BaseGameScene extends Scene {
       gs.removeListener('mainScene.rotationRatio')
       gs.removeListener('mainScene.logoPosition.x')
       gs.removeListener('mainScene.logoPosition.y')
+      gs.removeListener('actor.state')
     }
   }
 
@@ -87,5 +91,12 @@ export default class BaseGameScene extends Scene {
   */
   updateCustomStats() {
     this.customTrackingStats.custom = this.laps
+  }
+
+  pause () {
+    this.actor.pause()
+  }
+  resume () {
+    this.actor.resume()
   }
 }

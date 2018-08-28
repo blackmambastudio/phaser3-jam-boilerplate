@@ -4,14 +4,15 @@ export default class StateHandler {
     this.actor = params.actor
     this.stateconfig = params.states
     this.stateNames = Object.keys(this.stateconfig)
-    this.state = ''
+    this.state = 'idle'
     params.actor.setStateHandler(this)
     this.sounds = []
     this.registerSounds()
   }
 
   set(stateKey) {
-    console.log('set status', stateKey)
+    if(this.stateNames.indexOf(stateKey) === -1) return
+
     this.removeEvents()
     this.stopSounds()
     this.status = stateKey
@@ -64,5 +65,27 @@ export default class StateHandler {
     Object.keys(this.sounds).forEach(soundKey => {
       this.sounds[soundKey].stop()
     })
+  }
+
+  destroy() {
+    this.removeEvents()
+    this.stopSounds()
+    Object.keys(this.sounds).forEach(soundKey => {
+      this.sounds[soundKey].destroy()
+    }) 
+  }
+
+  pause () {
+    let sound = this.state.sound
+    if(sound) {
+      this.sounds[sound.name].pause()
+    }
+  }
+
+  resume () {
+    let sound = this.state.sound
+    if(sound) {
+      this.sounds[sound.name].resume()
+    }
   }
 }

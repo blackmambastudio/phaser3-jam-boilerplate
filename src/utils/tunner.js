@@ -50,6 +50,13 @@ function initGui() {
     gs.notifyListener('scene.current', val)
   })
   folderScene.open()
+
+  let folderActor = gui.addFolder('Current Actor')
+  folderActor.add(gs.stats.actor, 'state', ['idle', 'resting', 'wake', 'attack', 'walk', 'alert', 'hit', 'stun'])
+  .onChange((val) => {
+    gs.notifyListener('actor.state', val)
+  })
+  folderActor.open()
 }
 
 if(constants.DAT_GUI_ENABLE) {

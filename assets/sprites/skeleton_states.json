@@ -38,8 +38,8 @@
 			"repeat": 0
 		},
 		"oncomplete": {
-			"trigger": "triggerOnActor",
-			"values": ["change", []]
+			"trigger": "set",
+			"values": ["idle"]
 		},
 		"onupdate": {
 			"trigger": "triggerOnActor",
@@ -75,6 +75,10 @@
 			"totalFrames": 1,
 			"duration": 400,
 			"repeat": 0
+		},
+		"oncomplete": {
+			"trigger": "set",
+			"values": ["idle"]
 		},
 		"sound": {
 			"name": "fx_skeleton_alarm",
