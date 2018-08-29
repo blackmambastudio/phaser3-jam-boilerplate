@@ -31,7 +31,10 @@ const RUNNING_STATS = true
 // display dat.gui plugin
 const DAT_GUI_ENABLE = true
 
-const AFTER_BOOT_SCENE = 'madeWithScene'
+const AFTER_BOOT_SCENE = 'mainMenu'
+
+const REGEXP_TEXT = '\\[([¿¡\\wíóáéú,;{}\\[\\]\\s]+[.?!]*)\\]'
+const REGEXP_COLOR = '\\((\\w+)\\)'
 
 export default {
   WIDTH: 800 * SCALE,
@@ -45,5 +48,7 @@ export default {
   RUNNING_STATS,
   DAT_GUI_ENABLE,
   AFTER_BOOT_SCENE,
-  KEY: 'value'
+  KEY: 'value',
+  REGEXP_COLOR,
+  REGEXP_TEXT
 }

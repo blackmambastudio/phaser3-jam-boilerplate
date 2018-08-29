@@ -21,13 +21,13 @@ export default class MainMenuScene extends Scene {
       y: 100,
       style: this.fonts.BM_keney,
       text: this.getText('start'),
-      onClick: (self) => {
+      onClick: self => {
         this.changeToScene('baseGameScene')
       },
-      onHover: (self) => {
+      onHover: self => {
         self.setTint(0xff99ff)
       },
-      onOut: (self) => {
+      onOut: self => {
         self.setTint(0xffffff)
       },
       scale: 1.0
@@ -58,20 +58,21 @@ export default class MainMenuScene extends Scene {
       x: 30,
       y: 250,
       keyText: 'load',
-      onClick: (self) => {
-        getDataManager().load(null, true).then(data => {
-          if (typeof data === 'object') {
-            console.table(data)
-            gs.setAll('mainScene', data)
-            if(this.constants.DAT_GUI_ENABLE) {
-              tunner.refresh()
+      onClick: self => {
+        getDataManager()
+          .load(null, true)
+          .then(data => {
+            if (typeof data === 'object') {
+              console.table(data)
+              gs.setAll('mainScene', data)
+              if (this.constants.DAT_GUI_ENABLE) {
+                tunner.refresh()
+              }
+              this.changeToScene('baseGameScene')
+            } else {
+              console.error(data)
             }
-            this.changeToScene('baseGameScene')
-          }
-          else {
-            console.error(data)
-          }
-        })
+          })
       }
     })
 
@@ -79,7 +80,7 @@ export default class MainMenuScene extends Scene {
       x: 30,
       y: 300,
       keyText: 'delete_data',
-      onClick: (self) => {
+      onClick: self => {
         // remove the data in window.localStorage
         getDataManager().delete()
         // destroy the buttons related to saved data
@@ -97,20 +98,60 @@ export default class MainMenuScene extends Scene {
       x: 30,
       y: 350,
       keyText: 'language',
-      onClick: (self) => {
+      onClick: self => {
         this.translator.changeLanguage()
         this.updateLanguageTexts()
       }
     })
+
+    // get the text to format
+    let srcString = this.getText('formatTest', ['zapato'])
+    const srcRE = new RegExp(
+      this.constants.REGEXP_TEXT + this.constants.REGEXP_COLOR,
+      'g'
+    )
+    let results = []
+    let indexes = []
+
+    while ((results = srcRE.exec(srcString)) !== null) {
+      srcString = srcString.replace(results[0], (str, index) => {
+        var textRE = new RegExp(this.constants.REGEXP_TEXT)
+        var colorRE = new RegExp(this.constants.REGEXP_COLOR)
+        const extractedText = textRE.exec(str)[1]
+        indexes.push({
+          startsAt: index,
+          endsAt: index + extractedText.length - 1,
+          color: colorRE.exec(str)[1]
+        })
+        return extractedText
+      })
+    }
+
+    this.add
+      .dynamicBitmapText(30, 400, this.fonts.BM_keney.font, srcString)
+      .setDisplayCallback(data => {
+        data.color = 0xffffff
+
+        const o = indexes.find(indexObj => {
+          return (
+            data.index >= indexObj.startsAt && data.index <= indexObj.endsAt
+          )
+        })
+
+        if (o !== null && o !== undefined) {
+          data.color = o.color
+        }
+
+        return data
+      })
   }
 
-  updateLanguageTexts () {
-    this.start.setText( this.getText('start') )
+  updateLanguageTexts() {
+    this.start.setText(this.getText('start'))
     this.options.reloadText()
     this.credits.reloadText()
     this.load.reloadText()
     this.delete.reloadText()
     this.setLanguageButton.reloadText()
   }
-
 }

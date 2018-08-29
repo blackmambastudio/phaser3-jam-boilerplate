@@ -13,7 +13,8 @@
 		"pause": "pause",
 		"angle": "Angle: $[0]",
 		"laps": "Laps: $[0]",
-		"key": "value"
+		"key": "value",
+		"formatTest": "Hello [¿amigo mío?](0x00ffff). This is the shit. [asd [yes]](0x0000ff)"
 	},
 	"es": {
 		"newgame": "Nuevo Juego",
@@ -29,6 +30,7 @@
 		"pause": "pausar",
 		"angle": "Angulo: $[0]",
 		"laps": "Vueltas: $[0]",
-		"key": "valor"
+		"key": "valor",
+		"formatTest": "Hola [¿¡$[0] {nopoli} con cola!?](0x0000ff). Esto medio funciona: [asd](0xff00ff)"
 	}
 }
