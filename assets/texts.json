@@ -14,7 +14,7 @@
 		"angle": "Angle: $[0]",
 		"laps": "Laps: $[0]",
 		"key": "value",
-		"formatTest": "Hello [¿amigo mío?](0x00ffff). This is the shit. [asd [yes]](0x0000ff)"
+		"formatTest": "Hello [shoeie with tale](0x00ffff)."
 	},
 	"es": {
 		"newgame": "Nuevo Juego",
@@ -31,6 +31,6 @@
 		"angle": "Angulo: $[0]",
 		"laps": "Vueltas: $[0]",
 		"key": "valor",
-		"formatTest": "Hola [¿¡$[0] {nopoli} con cola!?](0x0000ff). Esto medio funciona: [asd](0xff00ff)"
+		"formatTest": "Hola [zapatín con cola](0x0000ff). [¿Cómo\nson](0xff00ff)[ vueltos?](0x00ff00). Las rosas son [$[0]](0xffff00)."
 	}
 }

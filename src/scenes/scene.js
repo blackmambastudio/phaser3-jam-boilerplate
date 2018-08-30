@@ -7,10 +7,10 @@ import StateHandler from '../managers/state'
 import stats from '../utils/performance'
 
 import Button from '../gameObjects/button'
-
+import RichText from '../gameObjects/richText'
 
 export default class Scene extends Phaser.Scene {
-  constructor (params) {
+  constructor(params) {
     super(params)
     this.constants = constants
     this.fonts = fonts
@@ -22,13 +22,13 @@ export default class Scene extends Phaser.Scene {
     }
   }
 
-  preload () {
+  preload() {
     this.sceneManager = getSceneManager(this.scene)
   }
 
-  init () {}
+  init() {}
 
-  create (params) {
+  create(params) {
     this.translator = getTranslator(this.cache)
 
     // display scene title
@@ -48,44 +48,45 @@ export default class Scene extends Phaser.Scene {
     this.input.on('pointerdown', (pointer, gameObject) => {
       if (gameObject.length > 0) {
         let object = gameObject[0]
-        if(object.getData('type') === 'button'){
+        if (object.getData('type') === 'button') {
           object.onClick()
         }
       }
     })
     this.input.on('pointerover', (pointer, gameObject) => {
       let object = gameObject[0]
-      if(object.getData('type') === 'button'){
+      if (object.getData('type') === 'button') {
         object.onHover()
       }
     })
     this.input.on('pointerout', (pointer, gameObject) => {
       let object = gameObject[0]
-      if(object.getData('type') === 'button'){
+      if (object.getData('type') === 'button') {
         object.onOut()
       }
     })
   }
 
-  open (sceneKey, data) {
+  open(sceneKey, data) {
     this.sceneManager.openMenu(sceneKey, data)
   }
 
-  close () {
+  close() {
     this.sceneManager.closeMenu(this.scene.key)
   }
 
-  changeToScene (sceneKey, data) {
+  changeToScene(sceneKey, data) {
     this.sceneManager.changeToScene(sceneKey, data)
   }
 
-
-  createButton (props) {
+  createButton(props) {
     props.style = props.style || this.defaultBitmapStyle
-    return this.add.displayList.add(new Button({
-      scene: this,
-      ...props
-    }))
+    return this.add.displayList.add(
+      new Button({
+        scene: this,
+        ...props
+      })
+    )
   }
 
   getText(val, params) {
@@ -94,7 +95,6 @@ export default class Scene extends Phaser.Scene {
     }
     return this.translator.translate(val)
   }
-
 
   update() {
     if (constants.RUNNING_STATS) {
@@ -125,7 +125,7 @@ export default class Scene extends Phaser.Scene {
     })
   }
 
-  loadState (key) {
+  loadState(key) {
     let config = this.cache.json.get(`${key}_states`)
     let states = Object.keys(config)
     states.forEach(stateName => {
@@ -144,4 +144,20 @@ export default class Scene extends Phaser.Scene {
 
   updateCustomStats() {}
 
+  /**
+   * Creates a Phaser.GameObjects.DynamicBitmapText that allows to render texts
+   * with colored characters.
+   * @param {Object} props Configuration to be used to place and render the text.
+   */
+  createRichText(props) {
+    // set the style to use by the DynamicBitmapText
+    props.style = props.style || this.defaultBitmapStyle
+    // add the element to the render list
+    return this.add.displayList.add(
+      new RichText({
+        scene: this,
+        ...props
+      })
+    )
+  }
 }

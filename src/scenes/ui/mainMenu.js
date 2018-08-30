@@ -104,46 +104,12 @@ export default class MainMenuScene extends Scene {
       }
     })
 
-    // get the text to format
-    let srcString = this.getText('formatTest', ['zapato'])
-    const srcRE = new RegExp(
-      this.constants.REGEXP_TEXT + this.constants.REGEXP_COLOR,
-      'g'
-    )
-    let results = []
-    let indexes = []
-
-    while ((results = srcRE.exec(srcString)) !== null) {
-      srcString = srcString.replace(results[0], (str, index) => {
-        var textRE = new RegExp(this.constants.REGEXP_TEXT)
-        var colorRE = new RegExp(this.constants.REGEXP_COLOR)
-        const extractedText = textRE.exec(str)[1]
-        indexes.push({
-          startsAt: index,
-          endsAt: index + extractedText.length - 1,
-          color: colorRE.exec(str)[1]
-        })
-        return extractedText
-      })
-    }
-
-    this.add
-      .dynamicBitmapText(30, 400, this.fonts.BM_keney.font, srcString)
-      .setDisplayCallback(data => {
-        data.color = 0xffffff
-
-        const o = indexes.find(indexObj => {
-          return (
-            data.index >= indexObj.startsAt && data.index <= indexObj.endsAt
-          )
-        })
-
-        if (o !== null && o !== undefined) {
-          data.color = o.color
-        }
-
-        return data
-      })
+    this.richText = this.createRichText({
+      x: 30,
+      y: 400,
+      text: this.getText('formatTest', ['azules']),
+      style: this.fonts.BM_keney
+    })
   }
 
   updateLanguageTexts() {
@@ -153,5 +119,8 @@ export default class MainMenuScene extends Scene {
     this.load.reloadText()
     this.delete.reloadText()
     this.setLanguageButton.reloadText()
+    this.richText.reloadText({
+      text: this.getText('formatTest', ['azules'])
+    })
   }
 }
