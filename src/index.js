@@ -31,6 +31,7 @@ window.game = new Phaser.Game({
   canvas: document.getElementById('game'),
   backgroundColor: constants.BACKGROUND_COLOR,
   pixelArt: true,
+  resolution: constants.SCALE,
   scene: [
     BootScene,
     SplashScene,
@@ -47,10 +48,6 @@ window.game = new Phaser.Game({
 // init managers
 getSceneManager(window.game.scene)
 getDataManager()
-
-document.getElementById('fullScreen').onclick = () => {
-  window['game']['canvas'][game.device.fullscreen.request]()
-}
 
 document.getElementById('game').focus()
 window.focus()
@@ -71,4 +68,12 @@ if(constants.DAT_GUI_ENABLE) {
   gs.setListener('scene.current', (val) => {
     getSceneManager().changeToScene(val)
   })
+}
+
+document.getElementById('fullScreen').onclick = () => {
+  window['game']['canvas'][game.device.fullscreen.request]()
+}
+
+document.getElementById('game').oncontextmenu = function (e) {
+  e.preventDefault()
 }

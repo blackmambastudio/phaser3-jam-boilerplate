@@ -14,7 +14,7 @@ const BACKGROUND_COLOR = 0x000
 const TIME_SPLASH = 200
 
 // time in milliseconds to keep visible the "made with" scene
-const TIME_MADE_WITH = 1200
+const TIME_MADE_WITH = 2500
 
 // displays the scene's title on the scene
 // useful to test navigation, you can delete
@@ -31,11 +31,11 @@ const RUNNING_STATS = true
 // display dat.gui plugin
 const DAT_GUI_ENABLE = true
 
-const AFTER_BOOT_SCENE = 'mainMenu'
+const AFTER_BOOT_SCENE = 'madeWithScene'
 
 export default {
-  WIDTH: 800 * SCALE,
-  HEIGHT: 600 * SCALE,
+  WIDTH: 320,
+  HEIGHT: 240,
   SCALE,
   BACKGROUND_COLOR,
   FAKE_LOADER_ACTIVE,

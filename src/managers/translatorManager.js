@@ -44,7 +44,7 @@ class Translation {
     if(this.translations[this.languageCode][val]) {
       return this.translations[this.languageCode][val]
     } else {
-      return '-'
+      return `MISS KEY \$${val}`
     }
   }
 

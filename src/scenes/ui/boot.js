@@ -136,11 +136,9 @@ export default class BootScene extends Scene {
       urlBase + 'assets/audio/fx/Skeleton_Stunned.ogg'
     )
     // load fonts
-    this.load.bitmapFont(
-      this.fonts.BM_keney.font,
-      urlBase + 'assets/fonts/keneyFont_0.png',
-      urlBase + 'assets/fonts/keneyFont.fnt'
-    )
+    this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
+    this.load.bitmapFont(this.fonts.BM_kenneyMini.font, urlBase + 'assets/fonts/KenneyMini-8px_0.png', urlBase + 'assets/fonts/KenneyMini-8px.fnt')
+    this.load.bitmapFont(this.fonts.BM_kenneyMiniSquare.font, urlBase + 'assets/fonts/KenneyMiniSquare-8px_0.png', urlBase + 'assets/fonts/KenneyMiniSquare-8px.fnt')
 
     // load json
     this.load.json('translations', urlBase + 'assets/texts.json')

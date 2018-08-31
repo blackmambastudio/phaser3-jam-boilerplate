@@ -3,13 +3,14 @@
 let stats = {
   game: {
     backgroundColor: '#000',
-    language: 'en'
+    language: 'en',
+    debug: false
   },
   mainScene: {
     rotationRatio: 0.00,
     logoPosition: {
-      x: 400,
-      y: 300
+      x: 160,
+      y: 120
     }
   },
   scene: {

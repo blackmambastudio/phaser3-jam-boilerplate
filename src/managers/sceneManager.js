@@ -95,6 +95,12 @@ class SceneManager {
     this.stack = [key]
     this.gameKeys = []
   }
+
+  updateLanguageTexts () {
+    this.stack.forEach(key => {
+      this.scene.getScene(key).updateLanguageTexts()
+    })
+  }
 }
 
 // unique instance

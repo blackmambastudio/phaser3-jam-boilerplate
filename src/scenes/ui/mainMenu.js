@@ -18,7 +18,7 @@ export default class MainMenuScene extends Scene {
     // base "Scene" file.
     this.start = this.createButton({
       x: 30,
-      y: 100,
+      y: 30,
       style: this.fonts.BM_keney,
       text: this.getText('start'),
       onClick: self => {
@@ -36,7 +36,7 @@ export default class MainMenuScene extends Scene {
     // 2nd option to setup a custom style in a button
     this.options = this.createButton({
       x: 30,
-      y: 150,
+      y: 60,
       style: {
         font: 'keneyPixel',
         hoverColor: 0x999666,
@@ -49,14 +49,14 @@ export default class MainMenuScene extends Scene {
 
     this.credits = this.createButton({
       x: 30,
-      y: 200,
+      y: 90,
       keyText: 'credits',
       onClick: _ => this.open('creditsScene')
     })
 
     this.load = this.createButton({
       x: 30,
-      y: 250,
+      y: 120,
       keyText: 'load',
       onClick: self => {
         getDataManager()
@@ -78,7 +78,7 @@ export default class MainMenuScene extends Scene {
 
     this.delete = this.createButton({
       x: 30,
-      y: 300,
+      y: 150,
       keyText: 'delete_data',
       onClick: self => {
         // remove the data in window.localStorage
@@ -96,7 +96,7 @@ export default class MainMenuScene extends Scene {
 
     this.setLanguageButton = this.createButton({
       x: 30,
-      y: 350,
+      y: 180,
       keyText: 'language',
       onClick: self => {
         this.translator.changeLanguage()
@@ -106,7 +106,7 @@ export default class MainMenuScene extends Scene {
 
     this.richText = this.createRichText({
       x: 30,
-      y: 400,
+      y: 210,
       text: this.getText('formatTest', ['azules']),
       style: this.fonts.BM_keney
     })

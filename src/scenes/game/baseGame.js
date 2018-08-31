@@ -30,7 +30,7 @@ export default class BaseGameScene extends Scene {
       frame: 'skeleton-idle-001.png'
     })
     this.actor = this.addActor(skeleton)
-    this.actor.setScale(10)
+    this.actor.setScale(5)
     this.actor.setTint(params.color || 0xffffff)
 
     this.actor.setStatus(gs.stats.actor.state)

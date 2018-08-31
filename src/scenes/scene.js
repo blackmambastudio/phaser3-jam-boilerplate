@@ -15,7 +15,7 @@ export default class Scene extends Phaser.Scene {
     this.constants = constants
     this.fonts = fonts
 
-    this.defaultBitmapStyle = fonts.BM_keney
+    this.defaultBitmapStyle = fonts.BM_kenneyMiniSquare
 
     if (constants.RUNNING_STATS) {
       this.customTrackingStats = {}
@@ -143,6 +143,12 @@ export default class Scene extends Phaser.Scene {
   }
 
   updateCustomStats() {}
+
+  /** 
+   * scene must overwrite this method to update automatically
+   * all of the contained texts 
+   */
+  updateLanguageTexts() {}
 
   /**
    * Creates a Phaser.GameObjects.DynamicBitmapText that allows to render texts
