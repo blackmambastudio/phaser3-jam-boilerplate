@@ -26,6 +26,6 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
-    "phaser": "^3.15.1"
+    "phaser": "^3.19.0"
   }
 }
